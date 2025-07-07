@@ -1,0 +1,348 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Aid Knock - Your First-Cure Advisor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+        /* Custom styling for select box (if still used, though replaced by input+datalist) */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%20197.3L159.1%2069.4c-4.2-4.2-11-4.2-15.2%200L5.4%20197.3c-4.2%204.2-4.2%2011%200%2015.2h0c4.2%204.2%2011%204.2%2015.2%200L143.5%2089.8c4.2-4.2%2011-4.2%2015.2%200l123.3%20123.3c4.2%204.2%2011%204.2%2015.2%200%20l0%200%200%200c4.2-4.2%204.2-11%200-15.2z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 0.8rem 0.6rem;
+            padding-right: 2.5rem;
+        }
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        /* Modal Content */
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg py-6">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-3xl font-bold flex items-center">
+                <svg class="w-10 h-10 mr-3 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 8H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM5 10h14v2h-14v-2zm14 4H5v-2h14v2z"/>
+                    <path fill-rule="evenodd" d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-4zM9 4h6v2H9V4zM7 11h2v-2h2v2h2v2h-2v2H9v-2H7v-2z" clip-rule="evenodd"/>
+                    <!-- Simplified first aid kit: main box and cross -->
+                    <path fill="#FF0000" d="M12 17h-2v-2H8v-2h2v-2h2v2h2v2h-2v2z"/>
+                </svg>
+                First Aid Knock
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <!-- Home (link to itself for clarity) -->
+                    <li><a href="{{ url_for('index') }}" class="hover:text-blue-200 transition duration-300">Home</a></li>
+                    <!-- Oxygen -->
+                    <li><a href="{{ url_for('oxygen') }}" class="hover:text-blue-200 transition duration-300">Oxygen</a></li>
+                    <!-- About Us -->
+                    <li><a href="{{ url_for('about') }}" class="hover:text-blue-200 transition duration-300">About Us</a></li>
+                    <!-- Contact -->
+                    <li><a href="{{ url_for('contact') }}" class="hover:text-blue-200 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container py-10">
+        <!-- Main Content Section - Symptom Input Form -->
+        <section class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8" id="main-content">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Your First-Cure Medicine Advisor</h2>
+            <p class="text-lg text-gray-600 mb-8 text-center leading-relaxed">
+                Enter your symptoms to get general advice on potential remedies.
+                <span class="font-bold text-red-600 block mt-2">Disclaimer: This information is for general knowledge only and is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult a healthcare professional.</span>
+            </p>
+
+            <form action="{{ url_for('recommend') }}" method="post" class="flex flex-col items-center justify-center space-y-4 md:space-y-0 md:space-x-6 mb-8">
+                <label for="symptom-input" class="text-lg font-medium text-gray-700">Describe your symptom:</label>
+                <div class="relative w-full md:w-1/2 lg:w-1/3">
+                    <input type="text" id="symptom-input" name="symptom" placeholder="e.g., headache, fever, mild cough" class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 bg-white transition duration-200 ease-in-out hover:border-400" list="symptom-suggestions">
+
+                    <!-- Datalist for search suggestions -->
+                    <datalist id="symptom-suggestions">
+                        {% for use in unique_uses %}
+                            <option value="{{ use }}">
+                        {% endfor %}
+                    </datalist>
+                </div>
+
+                <button type="submit" class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                    Get Advice
+                </button>
+            </form>
+
+            <div id="advice-output" class="hidden">
+                <!-- This section won't be used directly on index.html anymore for Flask page reloads -->
+            </div>
+        </section>
+
+        <!-- Organ Images Section -->
+        <section class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Understanding Your Body</h3>
+            <p class="text-lg text-gray-600 mb-8 text-center">
+                Click on an organ system to learn more about its function and how to keep it healthy.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Brain & Nervous System -->
+                <div id="brain-card" class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition duration-200 ease-in-out transform hover:scale-105">
+                    <svg class="w-24 h-24 text-blue-600 mb-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7zm0 15c-.55 0-1-.45-1-1v-2h2v2c0 .55-.45 1-1 1zm5.74-5.26C16.55 10.74 14.38 9 12 9s-4.55 1.74-5.74 2.74C5.19 10.47 4 8.38 4 6c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6 0 2.38-1.19 4.47-3 5.74zM12 4c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/>
+                        <circle cx="12" cy="7" r="2"/>
+                    </svg>
+                    <p class="font-medium text-gray-700">Brain & Nervous System</p>
+                </div>
+                <!-- Heart & Circulatory System -->
+                <div id="heart-card" class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition duration-200 ease-in-out transform hover:scale-105">
+                    <svg class="w-24 h-24 text-red-500 mb-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <p class="font-medium text-gray-700">Heart & Circulatory System</p>
+                </div>
+                <!-- Lungs & Respiratory System -->
+                <div id="lungs-card" class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition duration-200 ease-in-out transform hover:scale-105">
+                    <svg class="w-24 h-24 text-green-500 mb-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2c-3.31 0-6 2.69-6 6v7c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V8c0-3.31-2.69-6-6-6zm0 2c1.66 0 3 1.34 3 3v2h-6V7c0-1.66 1.34-3 3-3zM8 17v-2h8v2H8z"/>
+                        <path d="M12 22c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                    <p class="font-medium text-gray-700">Lungs & Respiratory System</p>
+                </div>
+                <!-- Digestive System -->
+                <div id="digestive-card" class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition duration-200 ease-in-out transform hover:scale-105">
+                    <svg class="w-24 h-24 text-yellow-600 mb-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                        <path d="M12 6c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        <path d="M15.5 12c.83 0 1.5-.67 1.5-1.5S16.33 9 15.5 9s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM8.5 12c.83 0 1.5-.67 1.5-1.5S9.33 9 8.5 9s-1.5.67-1.5 1.5.67 1.5 1.5 1.5z"/>
+                        <path d="M12 14.5c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                    <p class="font-medium text-gray-700 dark:text-gray-200">Digestive System</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals for Organ Descriptions (Initially Hidden) -->
+
+    <!-- Brain Modal -->
+    <div id="brain-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" data-modal="brain-modal">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Brain & Nervous System</h3>
+            <p class="text-gray-700 mb-4">
+                The brain is the command center of the nervous system, responsible for thought, memory, emotion, touch, motor skills, vision, breathing, temperature, hunger and every process that regulates our body. The nervous system is a complex network of nerves and cells that carry messages to and from the brain and spinal cord to various parts of the body.
+            </p>
+            <h4 class="text-xl font-semibold text-gray-800 mb-3">How to Take Care of Your Brain & Nervous System:</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>**Stay Mentally Active:** Engage in activities that challenge your brain, like puzzles, reading, learning new skills, or playing strategic games.</li>
+                <li>**Physical Exercise:** Regular physical activity increases blood flow to the brain, which is vital for its health.</li>
+                <li>**Healthy Diet:** A diet rich in omega-3 fatty acids, antioxidants (from fruits and vegetables), and whole grains supports brain function.</li>
+                <li>**Sufficient Sleep:** Aim for 7-9 hours of quality sleep per night. Sleep is crucial for memory consolidation and brain detoxification.</li>
+                <li>**Manage Stress:** Chronic stress can negatively impact the brain. Practice relaxation techniques like meditation, yoga, or deep breathing.</li>
+                <li>**Stay Hydrated:** Dehydration can affect cognitive function. Drink plenty of water throughout the day.</li>
+                <li>**Protect Your Head:** Always wear helmets during sports or activities that pose a risk of head injury.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Heart Modal -->
+    <div id="heart-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" data-modal="heart-modal">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Heart & Circulatory System</h3>
+            <p class="text-gray-700 mb-4">
+                The heart is a muscular organ that pumps blood throughout the body. The circulatory system, composed of blood vessels (arteries, veins, and capillaries), carries blood to and from the heart, delivering oxygen and nutrients to tissues and removing waste products.
+            </p>
+            <h4 class="text-xl font-semibold text-gray-800 mb-3">How to Take Care of Your Heart & Circulatory System:</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>**Regular Exercise:** Aim for at least 150 minutes of moderate-intensity aerobic exercise per week.</li>
+                <li>**Heart-Healthy Diet:** Consume a diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats. Limit saturated and trans fats, cholesterol, sodium, and added sugars.</li>
+                <li>**Maintain a Healthy Weight:** Excess weight puts extra strain on your heart.</li>
+                <li>**Manage Blood Pressure:** High blood pressure can damage arteries. Monitor it regularly and follow your doctor's advice.</li>
+                <li>**Control Cholesterol:** High LDL (bad) cholesterol can lead to plaque buildup. Manage it through diet and, if necessary, medication.</li>
+                <li>**Quit Smoking:** Smoking is one of the most significant risk factors for heart disease.</li>
+                <li>**Limit Alcohol Intake:** Excessive alcohol can raise blood pressure and contribute to heart failure.</li>
+                <li>**Manage Diabetes:** If you have diabetes, keep your blood sugar levels under control to protect your heart.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Lungs Modal -->
+    <div id="lungs-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" data-modal="lungs-modal">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Lungs & Respiratory System</h3>
+            <p class="text-gray-700 mb-4">
+                The lungs are a pair of spongy, air-filled organs located on either side of the chest. The respiratory system's main function is to take in oxygen and expel carbon dioxide, a process essential for life.
+            </p>
+            <h4 class="text-xl font-semibold text-gray-800 mb-3">How to Take Care of Your Lungs & Respiratory System:</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>**Avoid Smoking:** Smoking is the leading cause of lung disease. Avoiding it is the single best thing you can do for your lungs.</li>
+                <li>**Avoid Exposure to Pollutants:** Limit exposure to secondhand smoke, air pollution, and chemicals.</li>
+                <li>**Prevent Infections:** Wash your hands frequently, get vaccinated (flu, pneumonia), and avoid crowded places during peak illness seasons.</li>
+                <li>**Regular Exercise:** Physical activity strengthens your lungs and cardiovascular system.</li>
+                <li>**Practice Deep Breathing:** Techniques like diaphragmatic breathing can improve lung capacity and efficiency.</li>
+                <li>**Stay Hydrated:** Drinking enough water keeps the mucus lining in your airways thin, helping to clear irritants.</li>
+                <li>**Maintain Good Indoor Air Quality:** Use air purifiers, ensure good ventilation, and keep your home clean.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Digestive Modal -->
+    <div id="digestive-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" data-modal="digestive-modal">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Digestive System</h3>
+            <p class="text-gray-700 mb-4">
+                The digestive system is a group of organs working together to convert food into energy and basic nutrients to feed the entire body. It processes food, absorbs nutrients, and eliminates waste.
+            </p>
+            <h4 class="text-xl font-semibold text-gray-800 mb-3">How to Take Care of Your Digestive System:</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>**Eat a High-Fiber Diet:** Foods rich in fiber (fruits, vegetables, whole grains) promote healthy digestion and prevent constipation.</li>
+                <li>**Stay Hydrated:** Water helps break down food and keeps the digestive tract running smoothly.</li>
+                <li>**Include Probiotics:** Foods like yogurt, kefir, and fermented vegetables contain beneficial bacteria that support gut health.</li>
+                <li>**Limit Processed Foods, Sugars, and Unhealthy Fats:** These can disrupt gut balance and lead to digestive issues.</li>
+                <li>**Eat Mindfully:** Eat slowly, chew your food thoroughly, and avoid overeating.</li>
+                <li>**Regular Exercise:** Physical activity helps food move through your digestive system.</li>
+                <li>**Manage Stress:** Stress can significantly impact digestion. Practice stress-reducing techniques.</li>
+                <li>**Get Enough Sleep:** Lack of sleep can negatively affect gut health.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="container text-center text-gray-400">
+            <p>&copy; 2025 First Aid Knock. All rights reserved. <span class="block md:inline">This site does not provide medical advice.</span></p>
+            <p class="mt-2 text-sm">
+                <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a> |
+                <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to organ cards
+            const brainCard = document.getElementById('brain-card');
+            const heartCard = document.getElementById('heart-card');
+            const lungsCard = document.getElementById('lungs-card');
+            const digestiveCard = document.getElementById('digestive-card');
+
+            // Get references to modals
+            const brainModal = document.getElementById('brain-modal');
+            const heartModal = document.getElementById('heart-modal');
+            const lungsModal = document.getElementById('lungs-modal');
+            const digestiveModal = document.getElementById('digestive-modal');
+
+            // Get all close buttons
+            const closeButtons = document.querySelectorAll('.modal-close-button');
+
+            // Function to open a modal
+            function openModal(modalElement) {
+                modalElement.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            }
+
+            // Function to close a modal
+            function closeModal(modalElement) {
+                modalElement.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Add event listeners to organ cards
+            brainCard.addEventListener('click', () => openModal(brainModal));
+            heartCard.addEventListener('click', () => openModal(heartModal));
+            lungsCard.addEventListener('click', () => openModal(lungsModal));
+            digestiveCard.addEventListener('click', () => openModal(digestiveModal));
+
+            // Add event listeners to close buttons
+            closeButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const modalId = event.target.dataset.modal;
+                    const modalToClose = document.getElementById(modalId);
+                    if (modalToClose) {
+                        closeModal(modalToClose);
+                    }
+                });
+            });
+
+            // Close modal when clicking outside the content (on the overlay)
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (event) => {
+                    if (event.target === overlay) { // Check if the click was directly on the overlay
+                        closeModal(overlay);
+                    }
+                });
+            });
+
+            // Close modal when Escape key is pressed
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(modal => {
+                        closeModal(modal);
+                    });
+                }
+            });
+
+            // Existing JavaScript for symptom input and datalist (keep this)
+            // No changes needed here, as it's handled by Flask now.
+        });
+    </script>
+</body>
+</html>

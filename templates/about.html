@@ -1,0 +1,99 @@
+<!-- templates/about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Aid Knock - About Us</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg py-6">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-3xl font-bold flex items-center">
+                <svg class="w-10 h-10 mr-3 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 8H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM5 10h14v2h-14v-2zm14 4H5v-2h14v2z"/>
+                    <path fill-rule="evenodd" d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-4zM9 4h6v2H9V4zM7 11h2v-2h2v2h2v2h-2v2H9v-2H7v-2z" clip-rule="evenodd"/>
+                    <!-- Simplified first aid kit: main box and cross -->
+                    <path fill="#FF0000" d="M12 17h-2v-2H8v-2h2v-2h2v2h2v2h-2v2z"/>
+                </svg>
+                First Aid Knock
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="{{ url_for('index') }}" class="hover:text-blue-200 transition duration-300">Home</a></li>
+                    <li><a href="{{ url_for('oxygen') }}" class="hover:text-blue-200 transition duration-300">Oxygen</a></li>
+                    <li><a href="{{ url_for('about') }}" class="hover:text-blue-200 transition duration-300">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="hover:text-blue-200 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area - About Us Section -->
+    <main class="flex-grow container py-10">
+        <section class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">About First Aid Knock</h2>
+
+            <p class="text-lg text-gray-600 mb-4">
+                Welcome to <strong class="font-bold">First Aid Knock</strong>, your reliable companion for immediate, general first-cure advice on common ailments and over-the-counter medicines. In today's fast-paced world, minor health issues can arise unexpectedly, and knowing the right initial steps can make a significant difference.
+            </p>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                <li><strong class="font-bold">Provide Timely Guidance:</strong> Offer immediate, easy-to-understand first aid suggestions for everyday health concerns.</li>
+                <li><strong class="font-bold">Educate on Common Medicines:</strong> Guide you on the appropriate use of widely available non-prescription medications.</li>
+                <li><strong class="font-bold">Promote Informed Decisions:</strong> Help you make initial, informed choices for self-care, reducing uncertainty when a doctor isn't immediately available.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">How We Help You Choose the Right Medicine</h3>
+            <p class="text-lg text-gray-600 mb-4">
+                First Aid Knock works by providing general recommendations for over-the-counter (OTC) medicines based on common ailments. When you select a symptom, our guide will suggest typical first-line treatments and highlight key active ingredients (e.g., Acetaminophen, Ibuprofen). We focus on:
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                <li><strong class="font-bold">Symptom-Based Suggestions:</strong> Directing you to medicines commonly used for specific symptoms like headaches, fever, coughs, or muscle pain.</li>
+                <li><strong class="font-bold">Highlighting Active Ingredients:</strong> Educating you on the primary components of these medicines so you can understand what you are taking.</li>
+                <li><strong class="font-bold">Emphasizing Safety:</strong> Always reminding you to read product labels, adhere to dosage instructions, and be aware of potential side effects or interactions.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Important Disclaimer</h3>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                While First Aid Knock strives to provide helpful information, it is crucial to remember that <strong class="font-bold text-red-600">this platform is NOT a substitute for professional medical advice, diagnosis, or treatment.</strong> Our guidance is general and informational. Always consult a qualified healthcare professional for any medical concerns, persistent symptoms, or before starting any new medication, especially if you have underlying health conditions or are taking other drugs. Your health is paramount, and professional medical consultation ensures personalized and appropriate care.
+            </p>
+            <p class="text-lg text-gray-600 mt-4">
+                We hope First Aid Knock serves as a useful resource in your self-care journey, helping you navigate minor health issues with greater confidence.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="container text-center text-gray-400">
+            <p>&copy; 2025 First Aid Knock. All rights reserved. <span class="block md:inline">This site does not provide medical advice.</span></p>
+            <p class="mt-2 text-sm">
+                <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a> |
+                <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

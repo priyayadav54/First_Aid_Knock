@@ -1,0 +1,101 @@
+<!-- templates/contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Aid Knock - Contact Us</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg py-6">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-3xl font-bold flex items-center">
+                <svg class="w-10 h-10 mr-3 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 8H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM5 10h14v2h-14v-2zm14 4H5v-2h14v2z"/>
+                    <path fill-rule="evenodd" d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-4zM9 4h6v2H9V4zM7 11h2v-2h2v2h2v2h-2v2H9v-2H7v-2z" clip-rule="evenodd"/>
+                    <!-- Simplified first aid kit: main box and cross -->
+                    <path fill="#FF0000" d="M12 17h-2v-2H8v-2h2v-2h2v2h2v2h-2v2z"/>
+                </svg>
+                First Aid Knock
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="{{ url_for('index') }}" class="hover:text-blue-200 transition duration-300">Home</a></li>
+                    <li><a href="{{ url_for('oxygen') }}" class="hover:text-blue-200 transition duration-300">Oxygen</a></li>
+                    <li><a href="{{ url_for('about') }}" class="hover:text-blue-200 transition duration-300">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="hover:text-blue-200 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area - Contact Section -->
+    <main class="flex-grow container py-10">
+        <section class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Us</h2>
+            <p class="text-lg text-gray-600 mb-8 text-center">
+                We'd love to hear from you! Please reach out with any questions, feedback, or suggestions.
+            </p>
+
+            <div class="max-w-md mx-auto">
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-10 text-center text-gray-600">
+                <p>You can also reach us directly at:</p>
+                <p class="font-semibold mt-2">Email: <a href="mailto:support@firstaidknock.com" class="text-blue-600 hover:underline">support@firstaidknock.com</a></p>
+                <p class="font-semibold">Phone: <a href="tel:+1234567890" class="text-blue-600 hover:underline">+1 (234) 567-890</a></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="container text-center text-gray-400">
+            <p>&copy; 2025 First Aid Knock. All rights reserved. <span class="block md:inline">This site does not provide medical advice.</span></p>
+            <p class="mt-2 text-sm">
+                <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a> |
+                <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Aid Knock - Your First-Cure Advisor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+        /* Custom styling for select box */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%20197.3L159.1%2069.4c-4.2-4.2-11-4.2-15.2%200L5.4%20197.3c-4.2%204.2-4.2%2011%200%2015.2h0c4.2%204.2%2011%204.2%2015.2%200L143.5%2089.8c4.2-4.2%2011-4.2%2015.2%200l123.3%20123.3c4.2%204.2%2011%204.2%2015.2%200%20l0%200%200%200c4.2-4.2%204.2-11%200-15.2z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 0.8rem 0.6rem;
+            padding-right: 2.5rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg py-6">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-3xl font-bold flex items-center">
+                <svg class="w-10 h-10 mr-3 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 8H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM5 10h14v2h-14v-2zm14 4H5v-2h14v2z"/>
+                    <path fill-rule="evenodd" d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-4zM9 4h6v2H9V4zM7 11h2v-2h2v2h2v2h-2v2H9v-2H7v-2z" clip-rule="evenodd"/>
+                    <!-- Simplified first aid kit: main box and cross -->
+                    <path fill="#FF0000" d="M12 17h-2v-2H8v-2h2v-2h2v2h2v2h-2v2z"/>
+                </svg>
+                First Aid Knock
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <!-- Home -->
+                    <li><a href="#main-content" class="hover:text-blue-200 transition duration-300">Home</a></li>
+                    <!-- Oxygen -->
+                    <li><a href="#oxygen-section" class="hover:text-blue-200 transition duration-300">Oxygen</a></li>
+                    <!-- About Us -->
+                    <li><a href="#about-us-section" class="hover:text-blue-200 transition duration-300">About Us</a></li>
+                    <!-- Contact -->
+                    <li><a href="#" class="hover:text-blue-200 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container py-10">
+        <!-- Main Content Section -->
+        <section class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8" id="main-content">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Your First-Cure Medicine Advisor</h2>
+            <p class="text-lg text-gray-600 mb-8 text-center leading-relaxed">
+                Select a common ailment from the list below to get general advice on over-the-counter medicines.
+                <span class="font-bold text-red-600 block mt-2">Disclaimer: This information is for general knowledge only and is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult a healthcare professional.</span>
+            </p>
+
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 mb-8">
+                <label for="ailment-select" class="text-lg font-medium text-gray-700">I'm experiencing:</label>
+                <div class="relative w-full md:w-1/2 lg:w-1/3">
+                    <select id="ailment-select" class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 bg-white cursor-pointer transition duration-200 ease-in-out hover:border-blue-400">
+                        <option value="">-- Select an Ailment --</option>
+                        <option value="headache">Headache</option>
+                        <option value="fever">Fever</option>
+                        <option value="cough">Cough</option>
+                        <option value="sore_throat">Sore Throat</option>
+                        <option value="stomach_ache">Stomach Ache</option>
+                        <option value="cold_flu">Cold/Flu Symptoms</option>
+                        <option value="muscle_pain">Muscle Pain</option>
+                    </select>
+                </div>
+
+                <button id="get-advice-btn" class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                    Get Advice
+                </button>
+            </div>
+
+            <div id="advice-output" class="hidden bg-blue-50 border border-blue-200 text-blue-800 p-6 rounded-lg shadow-inner mt-8 transition-all duration-500 ease-in-out opacity-0 translate-y-4">
+                <!-- Advice will be displayed here -->
+                <h3 class="text-xl font-bold mb-3">Suggested First-Cure:</h3>
+                <p class="text-lg" id="advice-text"></p>
+                <p class="text-sm text-blue-600 mt-4">
+                    Remember to read the label carefully and follow dosage instructions. If symptoms persist or worsen, please consult a doctor.
+                </p>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about-us-section" class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8 hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">About First Aid Knock</h2>
+
+            <p class="text-lg text-gray-600 mb-4">
+                Welcome to <strong class="font-bold">First Aid Knock</strong>, your reliable companion for immediate, general first-cure advice on common ailments and over-the-counter medicines. In today's fast-paced world, minor health issues can arise unexpectedly, and knowing the right initial steps can make a significant difference.
+            </p>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                <li><strong class="font-bold">Provide Timely Guidance:</strong> Offer immediate, easy-to-understand first aid suggestions for everyday health concerns.</li>
+                <li><strong class="font-bold">Educate on Common Medicines:</strong> Guide you on the appropriate use of widely available non-prescription medications.</li>
+                <li><strong class="font-bold">Promote Informed Decisions:</strong> Help you make initial, informed choices for self-care, reducing uncertainty when a doctor isn't immediately available.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">How We Help You Choose the Right Medicine</h3>
+            <p class="text-lg text-gray-600 mb-4">
+                First Aid Knock works by providing general recommendations for over-the-counter (OTC) medicines based on common ailments. When you select a symptom, our guide will suggest typical first-line treatments and highlight key active ingredients (e.g., Acetaminophen, Ibuprofen). We focus on:
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                <li><strong class="font-bold">Symptom-Based Suggestions:</strong> Directing you to medicines commonly used for specific symptoms like headaches, fever, coughs, or muscle pain.</li>
+                <li><strong class="font-bold">Highlighting Active Ingredients:</strong> Educating you on the primary components of these medicines so you can understand what you are taking.</li>
+                <li><strong class="font-bold">Emphasizing Safety:</strong> Always reminding you to read product labels, adhere to dosage instructions, and be aware of potential side effects or interactions.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Important Disclaimer</h3>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                While First Aid Knock strives to provide helpful information, it is crucial to remember that <strong class="font-bold text-red-600">this platform is NOT a substitute for professional medical advice, diagnosis, or treatment.</strong> Our guidance is general and informational. Always consult a qualified healthcare professional for any medical concerns, persistent symptoms, or before starting any new medication, especially if you have underlying health conditions or are taking other drugs. Your health is paramount, and professional medical consultation ensures personalized and appropriate care.
+            </p>
+            <p class="text-lg text-gray-600 mt-4">
+                We hope First Aid Knock serves as a useful resource in your self-care journey, helping you navigate minor health issues with greater confidence.
+            </p>
+        </section>
+
+        <!-- Oxygen Section -->
+        <section id="oxygen-section" class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8 hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">The Power of Oxygen and Breathing</h2>
+
+            <p class="text-lg text-gray-600 mb-6 text-center">
+                Oxygen is vital for every cell in your body, powering all its functions from brain activity to muscle movement. Proper breathing is fundamental to ensuring your body receives the oxygen it needs to thrive.
+            </p>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6">Benefits of Optimal Oxygen Levels:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="flex items-start bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-blue-600 mr-3 mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 13c-2.757 0-5 2.243-5 5h10c0-2.757-2.243-5-5-5z"/>
+                        <path d="M12 21a9 9 0 100-18 9 9 0 000 18zM12 4a7 7 0 100 14 7 7 0 000-14z"/>
+                        <path fill-rule="evenodd" d="M12 21a9 9 0 100-18 9 9 0 000 18zM12 4a7 7 0 100 14 7 7 0 000-14zm-1 6h2v5h-2v-5z" clip-rule="evenodd"/>
+                        <circle cx="12" cy="7" r="2"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-gray-800">Enhanced Energy & Vitality:</p>
+                        <p class="text-gray-700 text-sm">Sufficient oxygen fuels cellular energy production, reducing fatigue and boosting overall stamina.</p>
+                    </div>
+                </div>
+                <div class="flex items-start bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-blue-600 mr-3 mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-1 3h2v7h-2V7zm0 8h2v2h-2v-2z"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-gray-800">Improved Brain Function:</p>
+                        <p class="text-gray-700 text-sm">The brain relies heavily on oxygen. Good oxygen supply supports focus, memory, and cognitive performance.</p>
+                    </div>
+                </div>
+                <div class="flex items-start bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-blue-600 mr-3 mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 20H7V3h10v18z"/>
+                        <path d="M9 7h6v2H9zM9 11h6v2H9zM9 15h6v2H9z"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-gray-800">Stronger Immune System:</p>
+                        <p class="text-gray-700 text-sm">Oxygen is crucial for healthy immune cells, helping your body fight off infections and illnesses.</p>
+                    </div>
+                </div>
+                <div class="flex items-start bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-blue-600 mr-3 mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 100-16 8 8 0 000 16z"/>
+                        <path fill-rule="evenodd" d="M10 9H8v3h2v-3zm4 0h-2v3h2v-3z" clip-rule="evenodd"/>
+                        <path d="M12 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-gray-800">Better Mood & Stress Reduction:</p>
+                        <p class="text-gray-700 text-sm">Deep breathing techniques can activate the parasympathetic nervous system, promoting relaxation and reducing anxiety.</p>
+                    </div>
+                </div>
+                <div class="flex items-start bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-blue-600 mr-3 mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-9H7v2h4v4h2v-4h4v-2h-4V7h-2v2z"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-gray-800">Detoxification:</p>
+                        <p class="text-gray-700 text-sm">Oxygen plays a key role in the body's natural detoxification processes, helping to eliminate waste products.</p>
+                    </div>
+                </div>
+                <div class="flex items-start bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-blue-600 mr-3 mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-1 5h2v6h-2z"/>
+                        <circle cx="12" cy="7" r="1"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-gray-800">Cellular Regeneration:</p>
+                        <p class="text-gray-700 text-sm">Adequate oxygen aids in cell repair and regeneration, contributing to overall health and anti-aging.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Breathing Techniques for Wellness</h3>
+            <p class="text-lg text-gray-600 mb-4">
+                Focused breathing practices involve various techniques designed to control and regulate the breath. Regular practice can significantly improve oxygen intake, lung capacity, and overall well-being.
+            </p>
+            <p class="text-lg text-gray-600 mb-4">
+                Here are a few techniques you can explore:
+            </p>
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">1. Three-Part Breath</h4>
+            <ul class="list-decimal list-inside text-gray-600 space-y-2 mb-4 pl-5">
+                <li>Lie on your back or sit comfortably.</li>
+                <li>Place one hand on your belly and the other on your chest.</li>
+                <li>Inhale slowly, feeling your belly expand first, then your rib cage, and finally your chest.</li>
+                <li>Exhale slowly, feeling your chest fall, then your rib cage, and finally your belly contracting.</li>
+                <li>Repeat for 5-10 minutes, focusing on the smooth, continuous flow of breath.</li>
+            </ul>
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">2. Alternate Nostril Breathing</h4>
+            <ul class="list-decimal list-inside text-gray-600 space-y-2 mb-4 pl-5">
+                <li>Sit in a comfortable meditative posture.</li>
+                <li>Close your right nostril with your right thumb.</li>
+                <li>Inhale slowly through your left nostril.</li>
+                <li>Close your left nostril with your ring finger, release your thumb from the right nostril, and exhale slowly through the right nostril.</li>
+                <li>Inhale through the right nostril.</li>
+                <li>Close your right nostril with your thumb, release your ring finger from the left nostril, and exhale slowly through the left nostril.</li>
+                <li>This completes one round. Continue for 5-10 rounds.</li>
+            </ul>
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">3. Victorious Breath</h4>
+            <ul class="list-decimal list-inside text-gray-600 space-y-2 mb-4 pl-5">
+                <li>Sit in a comfortable position with a straight spine.</li>
+                <li>Inhale slowly and deeply through both nostrils, constricting the back of your throat slightly as if whispering "ahh" on the inhale. This creates an ocean-like sound.</li>
+                <li>Exhale slowly and completely through both nostrils, maintaining the throat constriction and the "ahh" sound.</li>
+                <li>Focus on the sound and the gentle constriction. Practice for 5-10 minutes.</li>
+            </ul>
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">4. Skull Shining Breath</h4>
+            <ul class="list-decimal list-inside text-gray-600 space-y-2 mb-4 pl-5">
+                <li>Sit comfortably with a straight spine.</li>
+                <li>Take a deep inhale.</li>
+                <li>Exhale forcefully and quickly through your nose, contracting your abdominal muscles sharply. The inhale will happen passively.</li>
+                <li>Start with 20-30 rapid exhalations, then take a deep cleansing breath. Gradually increase rounds.</li>
+            </ul>
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">5. Bellows Breath</h4>
+            <ul class="list-decimal list-inside text-gray-600 space-y-2 mb-4 pl-5">
+                <li>Sit comfortably.</li>
+                <li>Take rapid, forceful inhales and exhales through the nose, moving the diaphragm quickly.</li>
+                <li>Both inhale and exhale are active and equal in length.</li>
+                <li>Start with 10-15 cycles, then rest. Repeat for 2-3 rounds.</li>
+            </ul>
+
+            <p class="text-sm text-blue-600 mt-4">
+                Always practice breathing exercises in a calm environment. If you have any respiratory conditions or health concerns, consult a healthcare professional before trying new breathing techniques.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="container text-center text-gray-400">
+            <p>&copy; 2025 First Aid Knock. All rights reserved. <span class="block md:inline">This site does not provide medical advice.</span></p>
+            <p class="mt-2 text-sm">
+                <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a> |
+                <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ailmentSelect = document.getElementById('ailment-select');
+            const getAdviceBtn = document.getElementById('get-advice-btn');
+            const adviceOutput = document.getElementById('advice-output');
+            const adviceText = document.getElementById('advice-text');
+            const aboutUsLink = document.querySelector('a[href="#about-us-section"]');
+            const aboutUsSection = document.getElementById('about-us-section');
+            const mainContent = document.getElementById('main-content');
+            const oxygenLink = document.querySelector('a[href="#oxygen-section"]');
+            const oxygenSection = document.getElementById('oxygen-section');
+
+            // Initially show the main content section (Home) and hide others
+            mainContent.classList.remove('hidden'); // Home section visible by default
+            aboutUsSection.classList.add('hidden');
+            oxygenSection.classList.add('hidden');
+
+            /**
+             * Provides a suggested first-cure medicine based on the selected ailment.
+             * @param {string} ailment - The selected ailment from the dropdown.
+             * @returns {string} - The suggested medicine and advice.
+             */
+            function getMedicineAdvice(ailment) {
+                console.log("Getting advice for ailment:", ailment); // Debugging log
+                switch (ailment) {
+                    case 'headache':
+                        return 'For a headache, consider taking a common pain reliever like <span class="font-semibold">Acetaminophen (e.g., Tylenol)</span> or <span class="font-semibold">Ibuprofen (e.g., Advil, Motrin)</span>. Rest in a quiet, dark room.';
+                    case 'fever':
+                        return 'For fever, use <span class="font-semibold">Acetaminophen (e.g., Tylenol)</span> or <span class="font-semibold">Ibuprofen (e.g., Advil, Motrin)</span> to reduce temperature and discomfort. Drink plenty of fluids.';
+                    case 'cough':
+                        return 'For a cough, a <span class="font-semibold">cough suppressant (e.g., Dextromethorphan)</span> for dry coughs or an <span class="font-semibold">expectorant (e.g., Guaifenesin)</span> for productive coughs might help. Honey and warm liquids can also soothe the throat.';
+                    case 'sore_throat':
+                        return 'For a sore throat, try <span class="font-semibold">throat lozenges, gargling with warm salt water,</span> or using a <span class="font-semibold">pain reliever like Acetaminophen or Ibuprofen</span>. Stay hydrated.';
+                    case 'stomach_ache':
+                        return 'For a mild stomach ache, an <span class="font-semibold">antacid (e.g., Tums, Rolaids)</span> or <span class="font-semibold">Bismuth Subsalicylate (e.g., Pepto-Bismol)</span> can provide relief. Avoid heavy or spicy foods.';
+                    case 'cold_flu':
+                        return 'For cold/flu symptoms, consider an <span class="font-semibold">over-the-counter cold and flu medication</span> that combines pain relievers, decongestants, and cough suppressants. Rest and hydration are key.';
+                    case 'muscle_pain':
+                        return 'For muscle pain, <span class="font-semibold">Ibuprofen (e.g., Advil)</span> or <span class="font-semibold">Naproxen (e.g., Aleve)</span> can help reduce inflammation and pain. Applying a hot or cold pack can also provide relief.';
+                    default:
+                        return 'Please select an ailment from the list to get advice.';
+                }
+            }
+
+            // Function to hide all main sections
+            function hideAllSections() {
+                mainContent.classList.add('hidden');
+                aboutUsSection.classList.add('hidden');
+                oxygenSection.classList.add('hidden');
+            }
+
+            // Event listener for the button click (main content functionality)
+            getAdviceBtn.addEventListener('click', () => {
+                console.log("Get Advice button clicked!"); // Debugging log
+                const selectedAilment = ailmentSelect.value;
+                console.log("Selected Ailment:", selectedAilment); // Debugging log
+                const advice = getMedicineAdvice(selectedAilment);
+
+                adviceText.innerHTML = advice;
+                if (selectedAilment) {
+                    adviceOutput.classList.remove('hidden', 'opacity-0', 'translate-y-4');
+                    adviceOutput.classList.add('opacity-100', 'translate-y-0');
+                    adviceOutput.style.display = 'block'; // Ensure it's visible, override 'hidden'
+                    console.log("Advice output displayed."); // Debugging log
+                } else {
+                    adviceOutput.classList.add('hidden', 'opacity-0', 'translate-y-4');
+                    adviceOutput.classList.remove('opacity-100', 'translate-y-0');
+                    adviceOutput.style.display = 'none'; // Ensure it's hidden
+                    console.log("No ailment selected, advice output hidden."); // Debugging log
+                }
+            });
+
+            // Event listener for "Home" navigation link
+            const homeLink = document.querySelector('a[href="#main-content"]');
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideAllSections();
+                mainContent.classList.remove('hidden');
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Event listener for "About Us" navigation link
+            aboutUsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideAllSections();
+                aboutUsSection.classList.remove('hidden');
+                aboutUsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Event listener for "Oxygen" navigation link
+            oxygenLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideAllSections();
+                oxygenSection.classList.remove('hidden');
+                oxygenSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
